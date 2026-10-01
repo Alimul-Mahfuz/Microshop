@@ -1,0 +1,37 @@
+@BasketApi_HostAddress = https://localhost:7289
+@SampleBuyerId = customer_101
+
+### Get Customer Basket (Empty or Existing)
+GET {{BasketApi_HostAddress}}/api/v1/basket/{{SampleBuyerId}}
+Accept: application/json
+
+### Add or Update Items in Customer Basket
+POST {{BasketApi_HostAddress}}/api/v1/basket
+Content-Type: application/json
+
+{
+  "buyerId": "{{SampleBuyerId}}",
+  "items": [
+    {
+      "id": "b1a2c3d4-0001",
+      "productId": 1,
+      "productName": ".NET Bot Premium Fleece Hoodie",
+      "unitPrice": 59.99,
+      "oldUnitPrice": 59.99,
+      "quantity": 2,
+      "pictureUrl": "dotnet_hoodie.png"
+    },
+    {
+      "id": "b1a2c3d4-0002",
+      "productId": 2,
+      "productName": "Azure Cloud Developer Ceramic Mug",
+      "unitPrice": 16.50,
+      "oldUnitPrice": 16.50,
+      "quantity": 1,
+      "pictureUrl": "azure_mug.png"
+    }
+  ]
+}
+
+### Clear / Delete Customer Basket
+DELETE {{BasketApi_HostAddress}}/api/v1/basket/{{SampleBuyerId}}

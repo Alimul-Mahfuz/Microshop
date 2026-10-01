@@ -1,0 +1,54 @@
+@CatalogApi_HostAddress = https://localhost:7123
+
+### Get All Catalog Items (Paged)
+GET {{CatalogApi_HostAddress}}/api/v1/catalog/items?pageIndex=0&pageSize=10
+Accept: application/json
+
+### Get Single Catalog Item by ID (Uses Redis Caching)
+GET {{CatalogApi_HostAddress}}/api/v1/catalog/items/1
+Accept: application/json
+
+### Get All Brands
+GET {{CatalogApi_HostAddress}}/api/v1/catalog/brands
+Accept: application/json
+
+### Get All Categories / Types
+GET {{CatalogApi_HostAddress}}/api/v1/catalog/types
+Accept: application/json
+
+### Search Items by Name Keyword
+GET {{CatalogApi_HostAddress}}/api/v1/catalog/items/by-name/Bot
+Accept: application/json
+
+### Create New Catalog Item
+POST {{CatalogApi_HostAddress}}/api/v1/catalog/items
+Content-Type: application/json
+
+{
+  "name": "Dotnet Mug",
+  "description": "Ceramic Dotnet mug",
+  "price": 15.99,
+  "pictureFileName": "mug.png",
+  "catalogBrandId": 2,
+  "catalogTypeId": 2,
+  "availableStock": 50,
+  "restockThreshold": 10,
+  "maxStockThreshold": 100,
+  "onReorder": false
+}
+
+### Update Catalog Item
+PUT {{CatalogApi_HostAddress}}/api/v1/catalog/items/1
+Content-Type: application/json
+
+{
+  "name": ".NET Bot Black Hoodie (Updated)",
+  "description": ".NET Black Hoodie Premium",
+  "price": 54.99,
+  "catalogBrandId": 2,
+  "catalogTypeId": 1,
+  "availableStock": 120
+}
+
+### Delete Catalog Item
+DELETE {{CatalogApi_HostAddress}}/api/v1/catalog/items/3

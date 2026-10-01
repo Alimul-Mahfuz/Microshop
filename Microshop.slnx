@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Microshop.AppHost/Microshop.AppHost.csproj" />
+  <Project Path="Microshop.BasketApi/Microshop.BasketApi.csproj" />
+  <Project Path="Microshop.CatalogApi/Microshop.CatalogApi.csproj" />
+  <Project Path="Microshop.ServiceDefaults/Microshop.ServiceDefaults.csproj" />
+</Solution>
