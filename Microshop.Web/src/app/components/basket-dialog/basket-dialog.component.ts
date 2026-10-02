@@ -1,12 +1,13 @@
 import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BasketService } from '../../services/basket.service';
+import { CheckoutDialogComponent } from '../checkout-dialog/checkout-dialog.component';
 
 @Component({
   selector: 'app-basket-dialog',
@@ -72,7 +73,7 @@ import { BasketService } from '../../services/basket.service';
         </div>
 
         <div class="footer-buttons">
-          <button mat-outlined-button color="warn" (click)="clear()" [disabled]="items().length === 0">
+          <button mat-stroked-button color="warn" (click)="clear()" [disabled]="items().length === 0">
             Clear
           </button>
           <button mat-raised-button color="primary" (click)="checkout()" [disabled]="items().length === 0">
@@ -161,6 +162,7 @@ import { BasketService } from '../../services/basket.service';
 export class BasketDialogComponent {
   private basketService = inject(BasketService);
   private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
   private dialogRef = inject(MatDialogRef<BasketDialogComponent>);
 
   items = computed(() => this.basketService.basket().items);
@@ -188,7 +190,9 @@ export class BasketDialogComponent {
   }
 
   checkout(): void {
-    this.snackBar.open('Checkout initiated!', 'Close', { duration: 3000 });
     this.dialogRef.close();
+    this.dialog.open(CheckoutDialogComponent, {
+      width: '500px'
+    });
   }
 }

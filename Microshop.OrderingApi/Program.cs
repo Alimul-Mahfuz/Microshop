@@ -1,5 +1,5 @@
-using Microshop.CatalogApi.Apis;
-using Microshop.CatalogApi.Data;
+using Microshop.OrderingApi.Apis;
+using Microshop.OrderingApi.Data;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,13 +18,10 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add Postgres EF Core DbContext managed by Aspire
-builder.AddNpgsqlDbContext<CatalogDbContext>("catalogdb");
+// Add Postgres EF Core DbContext for Ordering managed by Aspire
+builder.AddNpgsqlDbContext<OrderingDbContext>("orderingdb");
 
-// Add Redis client managed by Aspire
-builder.AddRedisClient("cache");
-
-// OpenAPI / Swagger documentation
+// OpenAPI / Scalar Documentation
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 
@@ -32,12 +29,12 @@ var app = builder.Build();
 
 app.UseCors();
 
-// Auto-seed database during development/startup
+// Auto-seed Ordering database during development/startup
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
-    var logger = scope.ServiceProvider.GetRequiredService<ILogger<CatalogDbContext>>();
-    await CatalogDbContextSeed.SeedAsync(context, logger);
+    var context = scope.ServiceProvider.GetRequiredService<OrderingDbContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<OrderingDbContext>>();
+    await OrderingDbContextSeed.SeedAsync(context, logger);
 }
 
 app.MapDefaultEndpoints();
@@ -48,7 +45,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
-// Map Catalog Endpoints
-app.MapCatalogApi();
+// Map Ordering Endpoints
+app.MapOrderingApi();
 
 app.Run();

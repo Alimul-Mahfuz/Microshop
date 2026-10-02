@@ -3,6 +3,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Microshop.CatalogApi\Microshop.CatalogApi.csproj" />
     <ProjectReference Include="..\Microshop.BasketApi\Microshop.BasketApi.csproj" />
+    <ProjectReference Include="..\Microshop.IdentityApi\Microshop.IdentityApi.csproj" />
+    <ProjectReference Include="..\Microshop.OrderingApi\Microshop.OrderingApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

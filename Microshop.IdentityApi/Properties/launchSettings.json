@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Microshop.IdentityApi": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50544;http://localhost:50545"
+    }
+  }
+}
